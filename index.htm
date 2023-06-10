@@ -62,6 +62,16 @@
       font-weight: bold;
       color: #cc0000;
     }
+    
+    /* 隐藏英文部分 */
+    [data-lang='en'] .en {
+      display: none;
+    }
+    
+    /* 隐藏中文部分 */
+    [data-lang='cn'] .cn {
+      display: none;
+    }
   </style>
 </head>
 
@@ -70,9 +80,11 @@
     
     <!-- 开始中文部分 -->
     <header>
-      <h1>宣传北京民大附中</h1>
+      <h1 class="cn">宣传北京民大附中</h1>
+      <h1 class="en">Introduction to Beijing Municipal No.4 High School Attached to CUMT</h1>
+      <button onclick="toggleLanguage()">中文 / English</button>
     </header>
-    <main>
+    <main data-lang="cn">
       <img src="mdfz1.jpg" alt="民大附中教学楼照片">
       <p>北京民大附中，是经教育部批准成立的一所具有特色的、现代化的高级中学。学校创办于 2000 年，坐落于北京市海淀区万泉河西路。</p>
       <p>学校秉承“<span class="highlight">求真务实</span>；知行合一”的办学理念，实施素质教育，注重培养学生的创新精神和实践能力。学校拥有优秀的师资力量和完善的教学设施，致力于为学生提供最好的教育资源。</p>
@@ -87,10 +99,7 @@
     <!-- 结束中文部分 -->
     
     <!-- 开始英文部分 -->
-    <header>
-      <h1>Introduction to Beijing Municipal No.4 High School Attached to CUMT</h1>
-    </header>
-    <main>
+    <main data-lang="en">
       <img src="mdfz1.jpg" alt="Photo of teaching building in Municipal No.4 High School Attached to CUMT">
       <p>The Beijing Municipal No.4 High School Attached to CUMT is a distinctive and modern senior high school approved by the Ministry of Education, founded in 2000 and located on West Wanquanhe Road, Haidian District, Beijing.</p>
       <p>The school adheres to the educational philosophy of "<span class="highlight">seeking truth from facts and integrating knowledge with practice</span>", implements quality education, and emphasizes the cultivation of students' innovative spirit and practical ability. The school has excellent teachers and complete teaching facilities, and is committed to providing the best educational resources for students.</p>
@@ -105,6 +114,24 @@
     <!-- 结束英文部分 -->
     
   </div>
+  
+  <!-- 开始 JavaScript 代码 -->
+  <script>
+    function toggleLanguage() {
+      var lang = document.querySelector('main').getAttribute('data-lang');
+      if (lang === 'cn') {
+        document.querySelector('main').setAttribute('data-lang', 'en'); // 切换数据语言属性
+        document.querySelector('h1.cn').classList.add('hidden'); // 隐藏中文标题
+        document.querySelector('h1.en').classList.remove('hidden'); // 显示英文标题
+      } else {
+        document.querySelector('main').setAttribute('data-lang', 'cn'); // 切换数据语言属性
+        document.querySelector('h1.cn').classList.remove('hidden'); // 显示中文标题
+        document.querySelector('h1.en').classList.add('hidden'); // 隐藏英文标题
+      }
+    }
+  </script>
+  <!-- 结束 JavaScript 代码 -->
+  
 </body>
 
 </html>
