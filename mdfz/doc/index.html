@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册与登录</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1>注册</h1>
+        <input type="text" id="username" placeholder="用户名">
+        <input type="password" id="password" placeholder="密码">
+        <button onclick="register()">注册</button>
+        <h1>登录</h1>
+        <input type="text" id="loginUsername" placeholder="用户名">
+        <input type="password" id="loginPassword" placeholder="密码">
+        <button onclick="login()">登录</button>
+        <div id="tableContainer" style="display:none;">
+            <h1>编辑表格</h1>
+            <table id="editableTable">
+                <!-- 表格内容将通过 JavaScript 动态生成 -->
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
