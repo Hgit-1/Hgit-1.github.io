@@ -1,35 +1,51 @@
 function register() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    
-    // 在真实环境中，你需要发送注册请求到后端，并在后端处理注册逻辑
-    // 这里简化处理，直接将用户信息保存到JSON文件中
-    const fs = require('fs');
-    const user = { username, password };
-    fs.appendFileSync('userprofile.json', JSON.stringify(user) + '\n');
 
-    alert('注册成功！');
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('注册成功！');
+            // 跳转到登录页面
+            window.location.href = 'login.html';
+        } else {
+            throw new Error('注册失败');
+        }
+    })
+    .catch(error => {
+        console.error('注册失败:', error);
+        alert('注册失败，请重试！');
+    });
 }
 
 function login() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
-    
-    // 在真实环境中，你需要发送登录请求到后端，并在后端验证用户信息
-    // 这里简化处理，直接读取JSON文件中的用户信息进行验证
-    const fs = require('fs');
-    const users = fs.readFileSync('userprofile.json', 'utf8').split('\n');
-    const user = users.find(u => {
-        if (!u) return false; // 忽略空行
-        const userData = JSON.parse(u);
-        return userData.username === username && userData.password === password;
-    });
 
-    if (user) {
-        alert('登录成功！');
-        // 跳转到编辑页面
-        window.location.href = 'edit.html';
-    } else {
-        alert('用户名或密码错误！');
-    }
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('登录成功！');
+            // 跳转到编辑页面
+            window.location.href = 'edit.html';
+        } else {
+            throw new Error('登录失败');
+        }
+    })
+    .catch(error => {
+        console.error('登录失败:', error);
+        alert('登录失败，请重试！');
+    });
 }
